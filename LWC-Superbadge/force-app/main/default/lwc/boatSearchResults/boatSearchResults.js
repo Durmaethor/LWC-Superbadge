@@ -1,5 +1,11 @@
 // ...
-import { LightningElement } from "lwc";
+import { LightningElement, wire, api, track } from "lwc";
+import getBoats from "@salesforce/apex/BoatDataService.getBoats";
+import { updateRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { refreshApex } from '@salesforce/apex';
+import { publish, MessageContext } from "lightning/messageService";
+import BoatMC from '@salforce/messageChannels/BoatMessageChannel__c';
 
 const SUCCESS_TITLE = 'Success';
 const MESSAGE_SHIP_IT     = 'Ship it!';
@@ -11,11 +17,13 @@ export default class BoatSearchResults extends LightningElement {
   selectedBoatId;
   columns = [];
   boatTypeId = '';
-  boats;
+  @track boats;
   isLoading = false;
+  @track draftValues;
   
   // wired message context
-  messageContext;
+  @wire(MessageContext) messageContext;
+
   // wired getBoats method 
   wiredBoats(result) { }
   
