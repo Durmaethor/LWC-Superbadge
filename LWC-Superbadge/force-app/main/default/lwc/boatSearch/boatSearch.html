@@ -5,7 +5,7 @@
         <lightning-card title="Find a Boat">
           <!-- New Boat button goes here -->
           <div slot="actions">
-            <lightning-button label="New Boat" onclick={createNewBoat}>
+            <lightning-button variant="neutral" label="New Boat" onclick={createNewBoat} class="slds-var-m-left_x-small">
             </lightning-button>
         </div>
           <p class="slds-var-p-horizontal_small">
@@ -17,17 +17,12 @@
       <!-- Bottom -->
       <lightning-layout-item size="12" class="slds-var-p-top_small slds-is-relative">
         <!-- Spinner goes here -->
-        <div class="slds-var-m-around_large">
-            <p if:true={handleDoneLoading}>Content has been loaded.</p>
-    
-             <div if:false={handleLoading} class="slds-is-relative">
-                <lightning-spinner
-                    alternative-text="Loading...">
-                </lightning-spinner>
-            </div>
-        </div>
+        <template if:true={isLoading}>
+          <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </template>
         <!-- boatSearchResults goes here -->
         <!-- onloading={handleLoading} ondoneloading={handleDoneLoading} -->
+        <c-boat-search-results onloading={handleLoading} ondoneloading={handleDoneLoading}></c-boat-search-results>
       </lightning-layout-item>
     </lightning-layout>
   </template>
