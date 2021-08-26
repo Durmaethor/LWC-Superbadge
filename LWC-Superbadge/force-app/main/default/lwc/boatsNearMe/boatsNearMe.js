@@ -43,8 +43,8 @@ export default class BoatsNearMe extends LightningElement {
     this.mapMarkers = boatData.map(boat => {
         return {
             location: {
-                Latitude: boat.Geolocation_Latitude__s, 
-                Longitude: boat.Geolocation_Longitude__s
+                Latitude: boat.Geolocation__Latitude__s, 
+                Longitude: boat.Geolocation__Longitude__s
             },
             title: boat.Name,
         };
